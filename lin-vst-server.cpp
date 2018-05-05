@@ -610,10 +610,10 @@ bool retval;
 
        retval = m_plugin->dispatcher(m_plugin, effSetSpeakerArrangement, 0, (long)&value, &ptr, 0);
 
-       tryRead((char *)&ptr, &m_shm[FIXED_SHM_SIZE - (sizeof(VstSpeakerArrangement)*2)], sizeof(VstSpeakerArrangement));
+       tryWrite(&m_shm[FIXED_SHM_SIZE - (sizeof(VstSpeakerArrangement)*2)], &ptr, sizeof(VstSpeakerArrangement));
 
-       tryRead((char *)&value, &m_shm[FIXED_SHM_SIZE - sizeof(VstSpeakerArrangement)], sizeof(VstSpeakerArrangement));
-
+       tryWrite(&m_shm[FIXED_SHM_SIZE - sizeof(VstSpeakerArrangement)], &value, sizeof(VstSpeakerArrangement));
+ 
        return retval;  
 }       
 
